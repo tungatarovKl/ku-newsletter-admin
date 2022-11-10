@@ -1,7 +1,4 @@
-<head>
-</head>
-<html>
-<body>
-<h1>Hello {{ $name }}</h1>
-</body>
-</html>
+@extends('base.commonTemplate')
+@section('body')
+<h1>Hello, world!</h1>
+@endsection
