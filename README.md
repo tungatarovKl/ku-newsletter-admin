@@ -16,6 +16,9 @@ sqlite3 news.db
 cp .env.example .env
 ```
 4. Сгенерировать APP-KEY в файле .env
+```
+php artisan key:generate
+```
 5. Прописать абсолютный путь до базы данных
 ```
 nano .env

@@ -10,5 +10,4 @@ return [
         'threads' => 1,
         'time' => 4,
     ],
-
 ];
