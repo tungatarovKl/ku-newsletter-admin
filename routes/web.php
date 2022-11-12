@@ -8,3 +8,8 @@ Route::get('/', function () {
 Route::get('/newsletter', function () {
     return view('newsletter', ['name' => 'World']);
 });
+
+//test db connection
+Route::get('/testmysql', function () {
+    echo var_dump(DB::select('SELECT VERSION();'));
+});
