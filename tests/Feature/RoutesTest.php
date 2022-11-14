@@ -6,8 +6,8 @@ use Tests\TestCase;
 
 class RoutesTest extends TestCase
 {
-    public function testIndex(){
-        $response = $this->get('/');
+    public function testSendMessage(){
+        $response = $this->post('/sendMessage');
         $response->assertRedirect('/newsletter');
     }
 

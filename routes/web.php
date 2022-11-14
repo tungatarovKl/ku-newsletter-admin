@@ -1,10 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\SubmitTextController;
+use App\Http\Controllers\SendMessageController;
 
 Route::get('/newsletter', function () {
-    return view('newsletter', [SubmitTextController::class, 'renderForm']);
+    return view('newsletter', [SendMessageController::class, 'renderForm']);
 });
 
-Route::post('/submitText', [SubmitTextController::class, 'submitText'])->name('submitText');
+Route::post('/sendMessage', [SendMessageController::class, 'sendMessage'])->name('sendMessage');
