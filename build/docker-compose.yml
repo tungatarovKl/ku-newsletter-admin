@@ -11,13 +11,13 @@ services:
         ports:
             -   80:80
     db:
-        container_name: mysql
+        container_name: mysql-web
         image: mysql
         restart: always
         environment:
             MYSQL_ROOT_PASSWORD: MYSQL_ROOT_PASSWORD
             MYSQL_DATABASE: ku1_newsletter
             MYSQL_USER: ku1-newsletter-user
-            MYSQL_PASSWORD:
+            MYSQL_PASSWORD: MYSQL_PASSWORD
         ports:
             - 3306:3306

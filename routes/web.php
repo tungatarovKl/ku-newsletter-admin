@@ -1,11 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
-Route::get('/', function () {
-    return redirect('/newsletter');
-});
+use App\Http\Controllers\SubmitTextController;
 
 Route::get('/newsletter', function () {
-    return view('newsletter', ['name' => 'World']);
+    return view('newsletter', [SubmitTextController::class, 'renderForm']);
 });
+
+Route::post('/submitText', [SubmitTextController::class, 'submitText'])->name('submitText');
