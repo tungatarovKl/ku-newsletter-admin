@@ -22,19 +22,22 @@ class SendMessageController extends Controller
                 'message' => $message,
                 'token' => $token
             ]);
+
         } catch (\Throwable $e) {
-            Log::channel('stderr')->error($e->getMessage());
+            Log::channel('stderr')->error("ERROR: ".$e->getMessage());
             return redirect('/newsletter')->with('error','Ошибка соединения с сервером');
         }
 
         if($response->successful()){
-            return redirect('/newsletter')->with('success','Сообщение отправлено!');
+            return redirect('/newsletter')->with('success', $response->body());
         }
+
         Log::channel('stderr')->error([
             'api_request_url' => $response->effectiveUri(),
             'api_response_status_code' => $response->status(),
             'api_response_body' => $response->body()]);
-        return redirect('/newsletter')->with('error','Ошибка отправки сообщения');
+
+        return redirect('/newsletter')->with('error', $response->body());
     }
 
     public function renderForm(){
