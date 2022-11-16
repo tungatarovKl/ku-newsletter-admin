@@ -24,7 +24,8 @@ class SendMessageController extends Controller
             ]);
 
         } catch (\Throwable $e) {
-            Log::channel('stderr')->error("ERROR: ".$e->getMessage());
+            Log::channel('stderr')->error('API connection error', ['message' => $e->getMessage()]);
+
             return redirect('/newsletter')->with('error','Ошибка соединения с сервером');
         }
 
@@ -32,7 +33,7 @@ class SendMessageController extends Controller
             return redirect('/newsletter')->with('success', $response->body());
         }
 
-        Log::channel('stderr')->error([
+        Log::channel('stderr')->error('API response error', [
             'api_request_url' => $response->effectiveUri(),
             'api_response_status_code' => $response->status(),
             'api_response_body' => $response->body()]);
