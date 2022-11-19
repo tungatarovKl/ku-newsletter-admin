@@ -2,6 +2,12 @@
 
 namespace App\Providers;
 
+use App\Events\MessageSentSuccessful;
+use App\Events\ApiConnectionError;
+use App\Events\ApiResponseError;
+use App\Listeners\FlagResponseError;
+use App\Listeners\SaveSentMessage;
+use App\Listeners\FlagConnectionError;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -17,6 +23,15 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
+        ],
+        MessageSentSuccessful::class =>[
+            SaveSentMessage::class,
+        ],
+        ApiConnectionError::class =>[
+            FlagConnectionError::class,
+        ],
+        ApiResponseError::class =>[
+            FlagResponseError::class,
         ],
     ];
 
