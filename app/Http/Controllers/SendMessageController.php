@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Http;
- 
+
+use App\Events\MessageSentSuccessful;
+use App\Events\ApiConnectionError;
+use App\Events\ApiResponseError;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 class SendMessageController extends Controller
 {
@@ -24,20 +26,18 @@ class SendMessageController extends Controller
             ]);
 
         } catch (\Throwable $e) {
-            Log::channel('stderr')->error('API connection error', ['message' => $e->getMessage()]);
+            ApiConnectionError::dispatch($e->getMessage());
 
             return redirect('/newsletter')->with('error','Ошибка соединения с сервером');
         }
 
         if($response->successful()){
+            MessageSentSuccessful::dispatch($message);
+
             return redirect('/newsletter')->with('success', $response->body());
         }
 
-        Log::channel('stderr')->error('API response error', [
-            'api_request_url' => $response->effectiveUri(),
-            'api_response_status_code' => $response->status(),
-            'api_response_body' => $response->body()]);
-
+        ApiResponseError::dispatch($response);
         return redirect('/newsletter')->with('error', $response->body());
     }
 
