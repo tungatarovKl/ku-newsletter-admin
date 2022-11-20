@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('message_history', function (Blueprint $table) {
             $table->increments('id');
             $table->text('message_text');
-            $table->timestamps();
+            $table->timestamp('created_at');
         });
     }
 
