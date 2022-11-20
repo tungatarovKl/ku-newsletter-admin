@@ -15,10 +15,8 @@ class SaveSentMessage
      */
     public function handle($event)
     {
-        $message = $event->message;
-
         $newMessage = new Message;
-        $newMessage->message_text=$message;
+        $newMessage->message_text=$event->message;
         $newMessage->save();
     }
 }

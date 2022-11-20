@@ -16,7 +16,6 @@ class FlagConnectionError
      */
     public function handle($event)
     {
-        $message= $event->errorMessage;
-        Log::channel('stderr')->error('API connection error', ['message' => $message]);
+        Log::channel('stderr')->error('API connection error', ['message' => $event->errorMessage]);
     }
 }
