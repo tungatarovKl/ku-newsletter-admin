@@ -1,0 +1,17 @@
+version: '3'
+services:
+    # Web- apache + php + laravel
+    newsletter-web:
+        container_name: newsletter-web
+        build:
+            context: web
+            dockerfile: Dockerfile
+        volumes:
+            - ../../:/usr/src/newsletter
+        ports:
+            - 80:80
+
+# Network to communicate with newsletter-messenger
+networks:
+    bridge:
+        external: true

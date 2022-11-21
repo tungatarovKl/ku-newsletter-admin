@@ -18,21 +18,21 @@ cp .env.example .env
 ```
 php artisan key:generate
 ```
-5. Указать пароль от БД в .env (DB_PASSWORD) и ./build/docker-compose.yml (MYSQL_PASSWORD)
-6. Указать токен для сервиса ku1-newsletter-messenger в .env (API_MESSENGER_TOKEN)
-7. Запустить docker-контейнеры
+5. Указать токен для сервиса ku1-newsletter-messenger в .env (API_MESSENGER_TOKEN)
+6. Запустить docker-контейнеры
 ```
-cd ./build
+cd ./build/dev
 docker-compose up -d
 ```
-8.Создать необходимые таблицы путем миграции. Для этого в контейнере докера, относящегося к админ контейнеру(ku1-admin-web) необходимо прописать следующую команду:
+7. Создать необходимые таблицы путем миграции
 ```
-php artisan migrate
+docker exec -it newsletter-web php artisan migrate
 ```
+8. Присвоить переменной API_MESSENGER_TOKEN в файле .env.example токен, сгенерированный в сервисе messenger
 ### Тестирование
 1. Запустить docker-контейнеры
 2. При необходимости изменить переменные для среды тестирования в ./phpunit.xml
 3. Запустить тесты в контейнере
 ```
-docker exec -it ku1-newsletter-admin-web php artisan test
+docker exec -it newsletter-web php artisan test
 ```

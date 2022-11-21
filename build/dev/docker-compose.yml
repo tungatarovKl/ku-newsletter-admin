@@ -1,0 +1,30 @@
+version: '3'
+services:
+    # Web- apache + php + laravel
+    newsletter-web:
+        container_name: newsletter-web
+        build:
+            context: web
+            dockerfile: Dockerfile
+        depends_on:
+            - newsletter-mysql
+        volumes:
+            - ../../:/usr/src/newsletter
+        ports:
+            - 80:80
+    # Database
+    newsletter-mysql:
+        container_name: newsletter-mysql
+        build:
+            context: database
+            dockerfile: Dockerfile
+        restart: always
+        volumes:
+            - ../../../newsletter-database:/var/lib/mysql
+        ports:
+            - 3326:3306
+
+# Network to communicate with newsletter-messenger
+networks:
+    bridge:
+        external: true
