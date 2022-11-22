@@ -20,7 +20,7 @@ services:
             dockerfile: Dockerfile
         restart: always
         volumes:
-            - ../../../newsletter-database:/var/lib/mysql
+            - newsletter-mysql-data:/var/lib/mysql
         ports:
             - 3326:3306
 
@@ -28,3 +28,6 @@ services:
 networks:
     bridge:
         external: true
+
+volumes:
+    newsletter-mysql-data: {}

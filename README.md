@@ -24,6 +24,10 @@ php artisan key:generate
 cd ./build/dev
 docker-compose up -d
 ```
+Данные и конфиги MySQL хранятся персистентно. Команда для очистки данных:
+```
+docker volume rm newsletter-mysql-data
+```
 7. Создать необходимые таблицы путем миграции
 ```
 docker exec -it newsletter-web php artisan migrate
