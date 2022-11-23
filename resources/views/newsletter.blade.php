@@ -1,7 +1,7 @@
 @extends('base.commonTemplate')
 
 @section('title')
-    <title>Newsletter</title>
+    <title>Send message</title>
 @endsection
 
 @include('base.navBar')

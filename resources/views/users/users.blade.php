@@ -1,7 +1,7 @@
 @extends('base.commonTemplate')
 
 @section('title')
-<title>Login</title>
+<title>Users</title>
 @endsection
 
 @include('base.navBar')
