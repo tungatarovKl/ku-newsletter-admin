@@ -4,6 +4,8 @@
     <title>Newsletter</title>
 @endsection
 
+@include('base.navBar')
+
 @section('body')
 @if(session()->has('error'))
     <div class="alert alert-danger">

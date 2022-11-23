@@ -10,6 +10,12 @@ use Illuminate\Http\Request;
 
 class SendMessageController extends Controller
 {
+    //Only for authenticated users
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
     Отправляет полученный текст из формы на сервис messenger
     **/
