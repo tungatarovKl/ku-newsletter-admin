@@ -7,9 +7,9 @@
 @include('base.navBar')
 
 @section('body')
-    @if(session()->has('error'))
-        <div class="alert alert-danger">
-            {{session()->get('error')}}
+    @if(session()->has('success'))
+        <div class="alert alert-success">
+            {{session()->get('success')}}
         </div>
     @endif
     <a href="/users/create"><button class="btn btn-secondary">Новый пользователь</button></a>

@@ -11,14 +11,16 @@ class MessageSentSuccessful
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $message;
+    public $sender;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(string $message)
+    public function __construct(string $message, string $sender)
     {
         $this->message = $message;
+        $this->sender = $sender;
     }
 
 }

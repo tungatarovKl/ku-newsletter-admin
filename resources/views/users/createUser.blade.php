@@ -3,6 +3,7 @@
     <title>Create User</title>
 @endsection
 
+@include('base.navBar')
 
 @section('body')
     <main class="login-form">
@@ -29,13 +30,13 @@
                                 <div class="form-group row">
                                     <label for="username" class="col-md-4 col-form-label text-md-right">Username</label>
                                     <div class="col-md-6">
-                                        <input type="text" id="username" class="form-control" name="username" required>
+                                        <input type="text" id="username" class="form-control @error('username') is-invalid @enderror" name="username" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
                                     <div class="col-md-6">
-                                        <input type="password" id="password" class="form-control" name="password" required>
+                                        <input type="password" id="password" class="form-control @error('password') is-invalid @enderror" name="password" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6 offset-md-4">

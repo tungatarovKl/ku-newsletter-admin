@@ -17,15 +17,9 @@ class UserController extends Controller
 
     //List of users
     public function usersGet(Request $request){
-
-        try {
             $users = User::all(["first_name", "last_name", "username"]);
-            return view('users/users')->with(array('users' => $users));
-        } catch (\Throwable $e){
-            DBConnectionError::dispatch($e->getMessage());
-        }
 
-        return view('users/users')->with('error', 'Ошибка связи с базой данных');
+            return view('users/users')->with(array('users' => $users));
     }
 
     //GET request for user creation
@@ -51,6 +45,6 @@ class UserController extends Controller
             'password' => Hash::make($data['password'])
         ]);
 
-        return redirect('/users')->with('success', 'Registered');
+        return redirect('/users')->with('success', 'Пользователь ' . $data['username'] . ' создан!');
     }
 }

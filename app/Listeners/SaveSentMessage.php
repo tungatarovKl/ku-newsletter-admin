@@ -17,6 +17,7 @@ class SaveSentMessage
     {
         $newMessage = new Message;
         $newMessage->message_text=$event->message;
+        $newMessage->sender=$event->sender;
         $newMessage->save();
     }
 }

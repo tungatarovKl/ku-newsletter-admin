@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Message;
 use Illuminate\Support\Facades\Http;
 
 use App\Events\MessageSentSuccessful;
@@ -8,7 +9,7 @@ use App\Events\ApiConnectionError;
 use App\Events\ApiResponseError;
 use Illuminate\Http\Request;
 
-class SendMessageController extends Controller
+class MessageController extends Controller
 {
     //Only for authenticated users
     public function __construct()
@@ -38,7 +39,7 @@ class SendMessageController extends Controller
         }
 
         if($response->successful()){
-            MessageSentSuccessful::dispatch($message);
+            MessageSentSuccessful::dispatch($message, auth()->user()->username);
 
             return redirect('/newsletter')->with('success', $response->body());
         }
@@ -49,5 +50,10 @@ class SendMessageController extends Controller
 
     public function renderForm(){
         return view('newsletter');
+    }
+
+    public function history(Request $request){
+        $messages = Message::all('sender', 'message_text', 'created_at');
+        return view('history')->with(array('messages' => $messages));
     }
 }
