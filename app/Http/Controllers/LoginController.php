@@ -10,7 +10,8 @@ class LoginController extends Controller
     /**
      * login GET request
      */
-    public function loginGET(Request $request){
+    public function loginGET(Request $request)
+    {
         return view('login');
     }
 

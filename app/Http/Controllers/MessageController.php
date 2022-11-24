@@ -48,11 +48,22 @@ class MessageController extends Controller
         return redirect('/newsletter')->with('error', $response->body());
     }
 
-    public function renderForm(){
+    /**
+     * newsletter GET request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function newsletterGET()
+    {
         return view('newsletter');
     }
 
-    public function history(Request $request){
+    /**
+     * history get request
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function history(Request $request)
+    {
         $messages = Message::all('sender', 'message_text', 'created_at');
         return view('history')->with(array('messages' => $messages));
     }

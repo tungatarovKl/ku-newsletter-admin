@@ -26,7 +26,7 @@ Route::get('/users/create', [UserController::class, 'createUserGET'])
 Route::post('/users/create/post', [UserController::class, 'createUserPOST'])
     ->name('createUserPOST');
 
-Route::get('/newsletter', [MessageController::class, 'renderForm']);
+Route::get('/newsletter', [MessageController::class, 'newsletterGET']);
 
 Route::post('/sendMessage', [MessageController::class, 'sendMessage'])
     ->name('sendMessage');
