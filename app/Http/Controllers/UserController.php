@@ -106,6 +106,6 @@ class UserController extends Controller
         $user->password = Hash::make($data['password']);
         $user->save();
 
-        return redirect('/users/'.$userID);
+        return redirect('/users/'.$userID)->with('success', 'Пароль пользователя '. $user->username .' изменен');
     }
 }

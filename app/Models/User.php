@@ -11,14 +11,14 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    public static function boot()
+    /*public static function boot()
     {
         parent::boot();
 
         static::creating(function ($model) {
             $model->created_at = $model->freshTimestamp();
         });
-    }
+    }*/
 
     /**
      * The attributes that are mass assignable.
@@ -46,5 +46,5 @@ class User extends Authenticatable
      *
      * @var bool
      */
-    public $timestamps = false;
+    //public $timestamps = false;
 }

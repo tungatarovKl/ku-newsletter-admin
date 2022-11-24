@@ -32,7 +32,11 @@ docker volume rm newsletter-mysql-data
 ```
 docker exec -it newsletter-web php artisan migrate
 ```
-8. Присвоить переменной API_MESSENGER_TOKEN в файле .env.example токен, сгенерированный в сервисе messenger
+8. Создать стандартного администратора
+```
+docker exec -it newsletter-web php artisan db:seed --class=UsersSeeder
+```
+9. Присвоить переменной API_MESSENGER_TOKEN в файле .env.example токен, сгенерированный в сервисе messenger
 ### Тестирование
 1. Запустить docker-контейнеры
 2. При необходимости изменить переменные для среды тестирования в ./phpunit.xml

@@ -5,6 +5,11 @@
 
 @include('base.navBar')
 @section('body')
+    @if(session()->has('success'))
+        <div class="alert alert-success">
+            {{session()->get('success')}}
+        </div>
+    @endif
     <table class="table table-hover">
         <tbody>
         <tr>
