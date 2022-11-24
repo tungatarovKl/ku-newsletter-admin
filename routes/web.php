@@ -26,6 +26,13 @@ Route::get('/users/create', [UserController::class, 'createUserGET'])
 Route::post('/users/create/post', [UserController::class, 'createUserPOST'])
     ->name('createUserPOST');
 
+Route::get('/users/{userID}', [UserController::class, 'userPage']);
+
+Route::get('/users/{userID}/delete', [UserController::class, 'deleteUser']);
+
+Route::post('/users/{userID}/setPassword', [UserController::class, 'setPassword'])
+    ->name('setUserPassword');
+
 Route::get('/newsletter', [MessageController::class, 'newsletterGET']);
 
 Route::post('/sendMessage', [MessageController::class, 'sendMessage'])

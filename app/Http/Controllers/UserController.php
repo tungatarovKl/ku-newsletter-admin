@@ -22,7 +22,7 @@ class UserController extends Controller
      */
     public function usersGet(Request $request)
     {
-        $users = User::all(["first_name", "last_name", "username"]);
+        $users = User::all();
 
         return view('users/users')->with(array('users' => $users));
     }
@@ -60,5 +60,52 @@ class UserController extends Controller
         ]);
 
         return redirect('/users')->with('success', 'Пользователь ' . $data['username'] . ' создан!');
+    }
+
+    /**
+     * User page GET request
+     * @param Request $request
+     * @param int $userID
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function userPage(Request $request, int $userID)
+    {
+        $user = User::find($userID);
+
+        return view('users/userPage')->with(array('user' => $user));
+    }
+
+    /**
+     * Delete user POST request
+     * @param Request $request
+     * @param int $userID
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function deleteUser(Request $request, int $userID)
+    {
+        $user = User::find($userID);
+        $user->delete();
+
+        return redirect('/users');
+    }
+
+    /**
+     * Change password POsT request
+     * @param Request $request
+     * @param int $userID
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function setPassword(Request $request, int $userID)
+    {
+        $request->validate([
+            'password' => 'required|min:8',
+        ]);
+
+        $user = User::find($userID);
+        $data = $request->all();
+        $user->password = Hash::make($data['password']);
+        $user->save();
+
+        return redirect('/users/'.$userID);
     }
 }
