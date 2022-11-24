@@ -1,11 +1,13 @@
 <?php
 
 namespace App\Listeners;
-use App\Models\Message;
+
+use App\Events\DBConnectionError;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Support\Facades\Log;
 
-class SaveSentMessage
+class FlagDBConnectionError
 {
     /**
      * Handle the event.
@@ -15,9 +17,6 @@ class SaveSentMessage
      */
     public function handle($event)
     {
-        $newMessage = new Message;
-        $newMessage->message_text=$event->message;
-        $newMessage->sender=$event->sender;
-        $newMessage->save();
+        Log::channel('stderr')->error('Database connection error', ['message' => $event->errorMessage]);
     }
 }

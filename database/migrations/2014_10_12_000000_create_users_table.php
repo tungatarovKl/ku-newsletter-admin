@@ -13,11 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('message_history', function (Blueprint $table) {
-            $table->increments('id');
-            $table->text('message_text');
-            $table->string('sender');
-            $table->timestamp('created_at');
+        Schema::create('users', function (Blueprint $table) {
+            $table->id();
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('username')->unique();
+            $table->string('password');
+            //$table->timestamp('created_at');
+            $table->timestamps();
         });
     }
 
@@ -28,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('message_history');
+        Schema::dropIfExists('users');
     }
 };
