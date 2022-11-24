@@ -15,21 +15,35 @@ class UserController extends Controller
         $this->middleware('auth');
     }
 
-    //List of users
-    public function usersGet(Request $request){
-            $users = User::all(["first_name", "last_name", "username"]);
+    /**
+     * List of users
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function usersGet(Request $request)
+    {
+        $users = User::all(["first_name", "last_name", "username"]);
 
-            return view('users/users')->with(array('users' => $users));
+        return view('users/users')->with(array('users' => $users));
     }
 
-    //GET request for user creation
-    public function createUserGET(Request $request){
+    /**
+     * create user GET request
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function createUserGET(Request $request)
+    {
         return view('users/createUser');
     }
 
-    //POST request for user creation
-    public function createUserPOST(Request $request){
-
+    /**
+     * create user POST request
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function createUserPOST(Request $request)
+    {
         $request->validate([
             'firstName' => 'required',
             'lastName' => 'required',

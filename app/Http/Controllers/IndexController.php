@@ -13,8 +13,9 @@ class IndexController extends Controller
         $this->middleware('auth');
     }
 
-    var $imgUrl;
-    public function index(Request $request){
+    private $imgUrl;
+    public function index(Request $request)
+    {
         try {$client = new Client([
             'base_uri' => 'https://api.thecatapi.com/v1/images/search?mime_types=gif',
             'timeout'  => 2.0,
